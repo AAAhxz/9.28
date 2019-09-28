@@ -98,6 +98,11 @@ public class YibanController {
 	@RequestMapping("/yiban/update.action")
 	@ResponseBody
 	public String yibanUpdate(Yiban yiban) {
+		Date date = new Date();
+		// 得到一个Timestamp格式的时间，存入mysql中的时间格式“yyyy/MM/dd HH:mm:ss”
+		Timestamp timeStamp = new Timestamp(date.getTime());
+		yiban.setCreatetime(timeStamp);
+		System.out.println(yiban);
 		int rows = yibanService.updateYiban(yiban);
 		if (rows > 0) {
 			return "OK";

@@ -106,6 +106,9 @@
 	        <if test="telnumber!=null">
 	            telnumber=#{telnumber},
 	        </if>
+	        <if test="createtime!=null">
+	        	createtime=#{createtime}
+	        </if>
 	    </set>
 	    where id=#{id}
 	</update>
