@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.core.dao.YibanDao" >
+		<!--SQL片段  -->
+		    <sql id="selectYibanListWhere">
+		        <where>
+			       <if test="username != null" >
+			           username like "%"#{username}"%"
+			       </if>
+			       <if test="campus != null" >
+			        and campus = #{campus}
+			       </if>
+			       <if test="department != null" >
+			        and department = #{department}
+			       </if>
+			       <if test="position != null" >
+			        and position = #{position}
+			       </if>
+		        </where>
+		    </sql>
+<select id="findYibanList" parameterType="com.itheima.core.po.Yiban" 
+                                           resultType="com.itheima.core.po.Yiban">
+		SELECT	
+						 id,
+						 username,
+						 campus,
+						 department,
+						 position,
+						 college,
+						 major,
+						 classes,
+						 qqnumber,
+						 telnumber
+		FROM
+			yiban
+			
+		<include refid="selectYibanListWhere"/>
+	</select>
+    <!-- 导出Excel-->
+    <select id="getEncryptDeviceForExcel" parameterType="com.itheima.core.po.Yiban" resultType="com.itheima.core.po.Yiban">
+	    select * from yiban
+    </select>
+    	<insert id="createYiban" parameterType="com.itheima.core.po.Yiban" >
+	    insert into yiban(
+						 campus,
+						 username,
+						 department,
+						 position,
+						 college,
+						 major,
+						 classes,
+						 qqnumber,
+						 telnumber,
+						 createtime
+	             )
+	             values(#{campus},
+	                    #{username},
+	                    #{department},
+	                    #{position},
+	                    #{college},
+	                    #{major},
+	                    #{classes},
+	                    #{qqnumber},
+	                    #{telnumber},
+	                    #{createtime}
+	            )
+	            </insert>
+	          <!-- 查询所有人 -->  
+		<select id="selectYibanListCount" parameterType="com.itheima.core.po.Yiban"  resultType="Integer">
+			select count(*) from yiban
+	</select>	
+		<!-- 根据id获取客户信息 -->
+	<select id="getYibanById" parameterType="Integer" 
+	resultType="com.itheima.core.po.Yiban">
+	    select * from yiban where id = #{id}
+	</select>
+	<!-- 更新客户 -->
+	<update id="updateYiban" parameterType="com.itheima.core.po.Yiban">
+	    update yiban
+	    <set>
+	        <if test="username!=null">
+	            username=#{username},
+	        </if>
+	        <if test="campus!=null">
+	            campus=#{campus},
+	        </if>
+	        <if test="department!=null">
+	            department=#{department},
+	        </if>
+	        <if test="position!=null">
+	            position=#{position},
+	        </if>
+	        <if test="college!=null">
+	            college=#{college},
+	        </if>
+	        <if test="major!=null">
+	            major=#{major},
+	        </if>
+	        <if test="classes!=null">
+	            classes=#{classes},
+	        </if>
+	        <if test="qqnumber!=null">
+	            qqnumber=#{qqnumber},
+	        </if>
+	        <if test="telnumber!=null">
+	            telnumber=#{telnumber},
+	        </if>
+	    </set>
+	    where id=#{id}
+	</update>
+	<!-- 删除客户 -->
+	<delete id="deleteYiban" parameterType="Integer">
+	    delete from yiban where id=#{id}
+	</delete>
+</mapper>
