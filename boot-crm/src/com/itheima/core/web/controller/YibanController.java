@@ -52,9 +52,14 @@ public class YibanController {
 		List<Yiban> yiban = yibanService.findYibanList(currentPage, rows, username, campus, department, position);
 		model.addAttribute("data", yiban);
 		PageInfo<Yiban> pageInfo = new PageInfo<Yiban>(yiban);// 分页
+		model.addAttribute("username",username);
+		model.addAttribute("campus",campus);
+		model.addAttribute("department",department);
+		model.addAttribute("position", position);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("pageInfo", pageInfo);// 设置属性pageInfo 传值给前台
 		return "yiban";
+
 	}
 
 	/**
