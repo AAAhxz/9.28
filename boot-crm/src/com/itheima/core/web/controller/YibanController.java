@@ -1,6 +1,7 @@
 package com.itheima.core.web.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +106,7 @@ public class YibanController {
 	public String yibanUpdate(Yiban yiban) {
 		Date date = new Date();
 		// 得到一个Timestamp格式的时间，存入mysql中的时间格式“yyyy/MM/dd HH:mm:ss”
+		System.out.println(date.getTime());
 		Timestamp timeStamp = new Timestamp(date.getTime());
 		yiban.setCreatetime(timeStamp);
 		int rows = yibanService.updateYiban(yiban);
@@ -138,7 +140,9 @@ public class YibanController {
 	public void export(HttpServletRequest request, HttpServletResponse response) {
 		Yiban yiban = new Yiban();// 创建实体类对象
 		List<Yiban> list = yibanService.getEncryptDeviceForExcel(yiban);
-		System.out.println(list);
+		for(int i = 0;i < list.size(); i ++){
+			//Timestamp timeStamp = new Timestamp(list.get(i).getCreatetime());
+		}
 		ExportExcel<Yiban> ee = new ExportExcel<Yiban>();
 		String[] headers = extracted();
 		String fileName = "易班成员信息汇总表";

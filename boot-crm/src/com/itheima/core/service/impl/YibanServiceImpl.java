@@ -46,6 +46,9 @@ public class YibanServiceImpl implements YibanService {
 	@Override
 	public List<Yiban> getEncryptDeviceForExcel(Yiban yiban) {
 		List<Yiban> list = yibandao.getEncryptDeviceForExcel(yiban);
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).getCreatetime());
+		}
 		return list;
 	}
 	@Override

@@ -39,7 +39,16 @@
 	</select>
     <!-- 导出Excel-->
     <select id="getEncryptDeviceForExcel" parameterType="com.itheima.core.po.Yiban" resultType="com.itheima.core.po.Yiban">
-	    select * from yiban
+	    select 			 campus,
+						 username,
+						 department,
+						 position,
+						 college,
+						 major,
+						 classes,
+						 qqnumber,
+						 telnumber,
+						 createtime from yiban
     </select>
     	<insert id="createYiban" parameterType="com.itheima.core.po.Yiban" >
 	    insert into yiban(
